@@ -22,6 +22,7 @@
         function handleRegistrationSubmit(event) {
             event.preventDefault();
             const formData = new FormData(event.target);
+
             fetch('https://script.google.com/macros/s/AKfycbx6nHyz_COeyO5NL9J0-f_BSosm6ckExO9ivuz2QVLDel_gPQa_n3kv35z6WBIl/exec', {
                 method: 'POST',
                 body: formData
@@ -31,7 +32,8 @@
                 document.body.innerHTML = output;
             })
             .catch(error => {
-                document.body.innerHTML = 'Errore durante la registrazione: ' + error;
+                console.error('Errore:', error);
+                document.body.innerHTML = 'Errore durante la registrazione: ' + error.message;
             });
         }
     </script>
