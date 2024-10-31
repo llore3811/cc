@@ -65,11 +65,20 @@
     <script>
         function handleRegistrationSubmit(event) {
             event.preventDefault();
-            google.script.run.withSuccessHandler(displayResult).processRegistrationForm(event.target);
-        }
+            const formData = new FormData(event.target);
 
-        function displayResult(output) {
-            document.body.innerHTML = output;
+            fetch('https://script.google.com/macros/s/AKfycbxHHsseximPhETmsNK5TCZ0_dJbb5w1f5XrjCyyegIQNT0QS1oc7O8XEd95tdGVKrWQ/exec', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(output => {
+                document.body.innerHTML = output;
+            })
+            .catch(error => {
+                console.error('Errore:', error);
+                document.body.innerHTML = 'Errore durante la registrazione: ' + error.message;
+            });
         }
     </script>
 </body>
