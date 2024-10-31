@@ -73,6 +73,7 @@
             })
             .then(response => response.text())
             .then(output => {
+                console.log('Success:', output);
                 document.body.innerHTML = output;
             })
             .catch(error => {
